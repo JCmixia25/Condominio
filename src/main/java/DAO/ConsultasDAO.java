@@ -11,18 +11,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author CompuFire
- */
 public class ConsultasDAO {
     ConexionDAO con = new ConexionDAO();
     
-    public boolean consultarUsuarioId(String usuario, String contraseña) throws Exception {
+        
+        public List<Usuario> consultarUsuarios() throws Exception {
         List<Usuario> Usuarios = new ArrayList<Usuario>();
 
         try {
-            String query = "SELECT id, nombre, puesto, usuario, contraseña FROM usuarios WHERE usuario ="+usuario+"AND"+"contraseña="+contraseña;
+            String query = "SELECT id_usuario, persona_id, nombre_usuario, contraseña, rol_id, fecha_ingreso, fecha_login, estado FROM usuario";
             Statement s = con.conexionMysql().createStatement();
             ResultSet r = s.executeQuery(query);
 
@@ -34,6 +31,9 @@ public class ConsultasDAO {
                 datos.setNombre_usuario(r.getString("nombre_usuario"));
                 datos.setContraseña(r.getString("contraseña"));
                 datos.setRol_id(r.getLong("rol_id"));
+                datos.setFecha_ingreso(r.getString("fecha_ingreso"));
+                datos.setFecha_login(r.getString("fecha_login"));
+                datos.setEstado(r.getString("estado"));
                 Usuarios.add(datos);
             }
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class ConsultasDAO {
             }
         }
 
-        return true;
+        return Usuarios;
     }
     
 }
