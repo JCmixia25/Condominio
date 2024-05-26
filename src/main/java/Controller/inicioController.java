@@ -21,4 +21,6 @@ public class inicioController implements Serializable  {
         // Puedes inicializar algún dato aquí si es necesario
         
     }
+    
+    
 }
