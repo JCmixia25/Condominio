@@ -36,6 +36,7 @@ public class inicioController implements Serializable  {
     public void validarUsuario() throws Exception{
         
         ConsultasDAO consulta = new ConsultasDAO();
+        
         try{
           
         } catch(Exception e){
