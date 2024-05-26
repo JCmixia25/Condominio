@@ -15,23 +15,26 @@
                 justify-content: center;
                 align-items: center;
                 height: 80vh;
-                background-image: url('../../Imagenes/inicio.png');
+                background-image: url('../../resources/img/inicio.png');
+                background-repeat: no-repeat;
                 background-size: cover;
                 background-color: #AAB7B8;
             }
-         .gridContainer {
+            .gridContainer {
                 /* No es necesario especificar display:flex aquí ya que h:panelGrid maneja su propio layout */
             }
-         .imageWrapper {
+            .imageWrapper {
                 text-align: center;
             }
             /* Estilo actualizado para el título */
-         .titulo {
+            .titulo {
                 position: absolute;
-                top: 10px;
-                left: 20px;
+                top: 0;
                 font-family: 'Times New Roman', Times, serif; /* Cambiado a Times New Roman */
                 font-size: 24px;
+                width: 100%;
+                height: 50px;
+                text-align: center;
                 color: #333;
                 font-weight: bold;
                 background-color: lightblue; /* Color de resaltado celeste */
@@ -48,12 +51,12 @@
                 <h:panelGrid columns="1" style="margin-bottom: 20px; margin: auto" styleClass="gridContainer">
                     <p:graphicImage style="width: 100px; height: 80px; margin: auto;" value="/Imagenes/Condominio.png"/>
                 </h:panelGrid>
-<p:inputText id="txtUsuario" placeholder="USUARIO" required="true" label="Username" style="width: 100%; height: 40px; font-size: 18px;" />         
-<p:password id="toggle" placeholder="CONTRASEÑA" label="Password" toggleMask="true" redisplay="true" style="width: 100%; height: 40px; font-size: 18px;"/>
+                <p:inputText id="txtUsuario" placeholder="USUARIO" required="true" label="Username" style="width: 100%; height: 40px; font-size: 18px;" />         
+                <p:password id="toggle" placeholder="CONTRASEÑA" label="Password" toggleMask="true" redisplay="true" style="width: 100%; height: 40px; font-size: 18px;"/>
 
             </h:panelGrid>
             <!-- Botón con tamaño aumentado -->
-           <p:commandButton value="ENTRAR" style="width: 100%; height: 40px; font-size: 20px;" />
+            <p:commandButton value="ENTRAR" style="width: 100%; height: 40px; font-size: 20px;" />
 
         </h:form>
 
