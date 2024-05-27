@@ -1,15 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Consulta de Usuario</title>
+        <style>
+            .nuevoEncabezado {
+                background-color: royalblue; /* Cambia esto por el color de fondo deseado */
+                color: white; /* Cambia esto por el color del texto deseado */
+                text-align: center;
+                padding: 20px;
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 20%;
+                display: flex;
+                justify-content: flex-end; /* Alínea los elementos a la derecha */
+                align-items: center;
+                gap: 20px; /* Espacio entre los elementos */
+            }
+            .usuario {
+                display: flex;
+                align-items: center;
+            }
+            .imagen {
+                border-radius: 15px;
+            }
+            .tamaño {
+                height: 30px;
+            }
+            .alinear-izquierda {
+                text-align: left;
+                display: block;
+                background-color: #ccc;
+            }
+        </style>    
+    </h:head>
+    <h:body>
+        <div class="nuevoEncabezado">
+            <div>
+                <p:graphicImage style="width: 100px; height: 80px;" value="../../resources/img/Condominio.png"/>  
+            </div>
+            <div id="contenedor1" class="usuario">
+                <p:graphicImage style="width: 100px; height: 80px;" value="../../resources/img/usuario.png" styleClass="imagen"/>  
+            </div>
+            <div id="contenedor2" class="usuario">
+                <h:panelGrid id="panel1" columns="1">
+                    <p:outputLabel id="txtUsuario" styleClass="tamaño alinear-izquierda" value="#{bkn_inicio.nombre_usuario}" />
+                    <p:commandButton value="Cerrar sesión" styleClass="tamaño" action="#{bkn_inicio.validarUsuario()}"/>
+                </h:panelGrid>
+            </div>
+        </div>
+
+
+    </h:body>
 </html>
