@@ -5,7 +5,11 @@
 package Controller;
 
 import DAO.ConsultasDAO;
+
 import Models.Anuncio;
+
+import Models.ControlReportes;
+
 import Models.Usuario;
 import java.io.IOException;
 import java.io.Serializable;
@@ -19,7 +23,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "bkn_inicio")
 public class inicioController implements Serializable {
-    
+
     private ConsultasDAO consulta;
 
     /**
@@ -121,6 +125,109 @@ public class inicioController implements Serializable {
     }
 
     /**
+     * @return the id_reporte
+     */
+    public Long getId_reporte() {
+        return id_reporte;
+    }
+
+    /**
+     * @param id_reporte the id_reporte to set
+     */
+    public void setId_reporte(Long id_reporte) {
+        this.id_reporte = id_reporte;
+    }
+
+    /**
+     * @return the autor_id
+     */
+    public Long getAutor_id() {
+        return autor_id;
+    }
+
+    /**
+     * @param autor_id the autor_id to set
+     */
+    public void setAutor_id(Long autor_id) {
+        this.autor_id = autor_id;
+    }
+
+    /**
+     * @return the usuario_asignado_id
+     */
+    public Long getUsuario_asignado_id() {
+        return usuario_asignado_id;
+    }
+
+    /**
+     * @param usuario_asignado_id the usuario_asignado_id to set
+     */
+    public void setUsuario_asignado_id(Long usuario_asignado_id) {
+        this.usuario_asignado_id = usuario_asignado_id;
+    }
+
+    /**
+     * @return the descripcion
+     */
+  
+
+    /**
+     * @return the fecha_creacion
+     */
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    /**
+     * @param fecha_creacion the fecha_creacion to set
+     */
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    /**
+     * @return the fecha_cierre
+     */
+    public String getFecha_cierre() {
+        return fecha_cierre;
+    }
+
+    /**
+     * @param fecha_cierre the fecha_cierre to set
+     */
+    public void setFecha_cierre(String fecha_cierre) {
+        this.fecha_cierre = fecha_cierre;
+    }
+
+    /**
+     * @return the estador
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estador the estador to set
+     */
+    public void setEstado(String estador) {
+        this.estado = estador;
+    }
+
+    /**
+     * @return the listaReportes
+     */
+    public List<ControlReportes> getListaReportes() {
+        return listaReportes;
+    }
+
+    /**
+     * @param listaReportes the listaReportes to set
+     */
+    public void setListaReportes(List<ControlReportes> listaReportes) {
+        this.listaReportes = listaReportes;
+    }
+
+    /**
      * @return the mensaje
      */
     public String getMensaje() {
@@ -154,31 +261,32 @@ public class inicioController implements Serializable {
 
             if (usuario.getNombre_usuario().compareTo(nombre_usuario) == 0 && usuario.getContraseña().compareTo(contraseña) == 0) {
                 System.out.println("Usuario correcto");
-                
+
                 nombre_usuario = "";
                 contraseña = "";
                 mensaje = "";
-                
-                if(usuario.getRol_id()==1){
+
+                if (usuario.getRol_id() == 1) {
                     direccion.inicioAdmin();
-                }else if(usuario.getRol_id()==2){
+                } else if (usuario.getRol_id() == 2) {
                     direccion.inicioManto();
-                }else if(usuario.getRol_id()==3){
+                } else if (usuario.getRol_id() == 3) {
                     direccion.inicioCliente();
                 }
-                   
+
             } else {
                 mensaje = "Credenciales incorrectas";
             }
         }
     }
-    
-    public void cargarUsuarios(){
-        
+
+    public void cargarUsuarios() {
+
         System.out.println("HOLA ESTA ES UNA PRUEBA");
 //        RequestContext.getCurrentInstance().execute("cargarVistaUsuarios()");
-       
+
     }
+
     /**
      * @return the contraseña
      */
@@ -278,20 +386,6 @@ public class inicioController implements Serializable {
     }
 
     /**
-     * @return the estado
-     */
-    public String getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    /**
      * @return the listaUsuarios
      */
     public List<Usuario> getListaUsuarios() {
@@ -316,6 +410,7 @@ public class inicioController implements Serializable {
     private String estado = "";
     private List<Usuario> listaUsuarios;
     private String mensaje = "";
+
     
     //Anuncio
     private Long id_anuncio;
@@ -325,7 +420,18 @@ public class inicioController implements Serializable {
     private String fecha_publicacion;
     private String fecha_vencimiento;
     private List<Anuncio> listaAnuncios;
-   
+
+
+    //Control reporte
+    private Long id_reporte;
+    private Long autor_id;
+    private Long usuario_asignado_id;
+
+    private String fecha_creacion;
+    private String fecha_cierre;
+    // private String estado;
+    private List<ControlReportes> listaReportes;
+
 
     public void listarUsuarios() {
 
@@ -339,29 +445,30 @@ public class inicioController implements Serializable {
         }
 
     }
-    
+
     public void listarAnuncios() {
 
         ConsultasDAO consulta = new ConsultasDAO();
 
         try {
-             setListaAnuncios(consulta.consultarAnuncios());
+
+            setListaAnuncios(consulta.consultarAnuncios());
             System.out.println("Usuarios: " + consulta.consultarAnuncios());
+
         } catch (Exception e) {
-            System.out.println("Error al listar usuarios");
+            System.out.println("Error al listar anuncios");
         }
 
     }
-    
-    
-     public void logout() {
+
+    public void logout() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
         Long userId = consulta.getUserId(nombre_usuario, contraseña);
         if (session != null) {
             session.invalidate(); // Invalida la sesión actual
-        System.out.println("Session ID: " + session.getId());
-        System.out.println("User ID stored in session: " + userId);
+            System.out.println("Session ID: " + session.getId());
+            System.out.println("User ID stored in session: " + userId);
         }
         try {
             // Redirigir a la página de login
@@ -375,7 +482,10 @@ public class inicioController implements Serializable {
     public void init() {
         // Puedes inicializar algún dato aquí si es necesario
         listarUsuarios();
+    
         listarAnuncios();
+//        listarReportes();
+        
     }
 
 }
