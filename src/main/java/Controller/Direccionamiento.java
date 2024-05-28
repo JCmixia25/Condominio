@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
+
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -16,8 +18,10 @@ import javax.faces.context.FacesContext;
  *
  * @author CompuFire actionListener="#{bkn_direccion.inicioAdmin}"
  */
+
 @ManagedBean(name = "bkn_direccion")
 public class Direccionamiento implements Serializable {
+
 
     public void inicioAdmin() {
 
@@ -44,7 +48,7 @@ public class Direccionamiento implements Serializable {
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         try {
-            externalContext.redirect("http://localhost:8089/CondominioGT/pages/inicio/bienvenidaCliente.xhtml"); // Reemplaza esta URL con la que desees abrir.
+            externalContext.redirect("http://localhost:8075/CondominioGT/pages/inicio/bienvenidaCliente.xhtml"); // Reemplaza esta URL con la que desees abrir.
         } catch (IOException ex) {
             Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
