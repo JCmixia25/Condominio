@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+//import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "bkn_inicio")
 public class inicioController implements Serializable {
@@ -66,7 +67,13 @@ public class inicioController implements Serializable {
             }
         }
     }
-
+    
+    public void cargarUsuarios(){
+        
+        System.out.println("HOLA ESTA ES UNA PRUEBA");
+//        RequestContext.getCurrentInstance().execute("cargarVistaUsuarios()");
+       
+    }
     /**
      * @return the contraseña
      */
@@ -222,6 +229,7 @@ public class inicioController implements Serializable {
     public void init() {
         // Puedes inicializar algún dato aquí si es necesario
         listarUsuarios();
+//       cargarUsuarios();
     }
 
 }

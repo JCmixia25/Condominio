@@ -92,31 +92,55 @@
                 background: #2c3e50;
                 border: 1px solid #dee2e6;
                 border-radius: 4px;
-
             }
             body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-text {
                 float: none;
                 vertical-align: middle;
                 color: ghostwhite;
             }
+            .ui-button .ui-button-text {
+
+            }
+            .ui-button .ui-button-text:hover {
+                display: block;
+                line-height: normal;
+                background: #dee2e6;
+                border-radius: 20px;
+            }
+
+            .nombre-usuario{
+                margin: 10px;
+                padding: 5px;
+                background: #dee2e6;
+                border-radius: 5px;
+                color: darkblue;
+            }
+
+            #salir {
+                display: block!important;
+                line-height: normal!important;
+                background: #34495e!important;
+                border-radius: 20px!important;
+            }
+
         </style>
+
     </h:head>
     <h:body>
         <div class="container">
             <div class="sidebar">
                 <h2>Prados La Esperanza</h2>
-                <p:menu>
-                    <p:menuitem value="Condominio" url="#" />
-                    <p:menuitem value="Documentos" url="#" />
-                    <p:menuitem value="Avisos" url="#" />
-                    <p:menuitem value="Ramais" url="#" />
-                    <p:menuitem value="Condóminos" url="#" />
-                    <p:menuitem value="Mensajes" url="#" />
-                    <p:menuitem value="Eventos" url="#" />
-                    <p:menuitem value="Reservas Teste" url="#" />
-                    <p:menuitem value="Reservas" url="#" />
-
-                </p:menu>
+                <h:form>
+                    <p:menu>
+                        <p:menuitem value="Pagos" actionListener="#{bkn_direccion.controlPagos()}" />
+                        <p:menuitem value="Reportes" actionListener="#{bkn_direccion.controlReportes()}"/>
+                        <p:menuitem value="Propiedades" actionListener="#{bkn_direccion.controlPropiedades()}"/>
+                        <p:menuitem value="Usuarios" actionListener="#{bkn_direccion.controlUsuarios()}"/>
+                        <p:menuitem value="Anuncios" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
+                        <p:menuitem value="Mensajes" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
+                        <p:menuitem value="Reservas" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
+                    </p:menu>
+                </h:form>
             </div>
             <div class="main-content">
                 <div class="header">
@@ -126,12 +150,18 @@
                     <div class="profile">
                         <p:graphicImage value="/resources/img/usuario.png" style="width: 40px; height: 40px;" />
                         <div>
-                            <h:outputText value="Josué Castillo" style="margin: 0;" />
-                            <p:commandButton value="Cerrar sesión" action="#{bkn_inicio.validarUsuario()}" style="margin: 0; background: none; border: none; color: white; cursor: pointer;" />
+                            <h:form>
+                                <div>
+                                    <h:outputText id="user" value="Eybi Gúzman" styleClass="nombre-usuario"/>
+                                </div>
+                                <div>
+                                    <p:commandButton id="salir" value="Salir" action="#{bkn_direccion.pasarelaPagos()}" style="margin:5px; background: none; border: none; padding: 1px; color: white; cursor: pointer;"/>
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>
-                <div class="content">
+                <div  class="content">
                     <h1>Listar Idiomas</h1>
                     <div class="table-container">
                         <p:panelGrid columns="3">
@@ -144,25 +174,16 @@
                             <p:outputLabel value=" registros" />
                             <p:outputLabel value="Procurar por:" />
                             <p:inputText />
-                            <p:commandButton value="Adicionar" action="#{bkn_inicio.addIdioma()}" style="float: right; background-color: royalblue; color: white; border: none; padding: 10px 20px; cursor: pointer;" />
+                            <p:commandButton value="Adicionar"  style="float: right; background-color: royalblue; color: white; border: none; padding: 10px 20px; cursor: pointer;" />
                         </p:panelGrid>
-                        <p:dataTable value="#{bkn_inicio.idiomas}" var="idioma" styleClass="table">
+                        <p:dataTable  var="idioma" styleClass="table">
                             <p:column headerText="Nome">
-                                <h:outputText value="#{idioma.nome}" />
+                                <h:outputText value="Ingles" />
                             </p:column>
                             <p:column headerText="Ordem">
-                                <h:outputText value="#{idioma.ordem}" />
+                                <h:outputText value="Español" />
                             </p:column>
-                            <p:column headerText="Situação">
-                                <h:outputText value="#{idioma.situacao}" />
-                            </p:column>
-                            <p:column headerText="Condomínio">
-                                <h:outputText value="#{idioma.condominio}" />
-                            </p:column>
-                            <p:column headerText="Ações">
-                                <p:commandButton value="Editar" action="#{bkn_inicio.editIdioma(idioma)}" />
-                                <p:commandButton value="Eliminar" action="#{bkn_inicio.deleteIdioma(idioma)}" />
-                            </p:column>
+                     
                         </p:dataTable>
                     </div>
                 </div>
