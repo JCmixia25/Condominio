@@ -1,15 +1,124 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>Pagos Generales</title>
+        <!-- Estilos CSS personalizados -->
+        <style type="text/css">
+            .header {
+                height: 3cm;
+                background-color: royalblue; /* Azul, puedes ajustar el color */
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+                color: white;
+                justify-content: space-between;
+            }
+            .header .menu {
+                display: flex;
+                align-items: center;
+            }
+            .header .menu p:selectOneMenu {
+                margin-right: 20px;
+            }
+            .header .menu h:outputText {
+                margin-right: 20px;
+            }
+            .form-container {
+                margin: 20px auto;
+                width: 80%;
+                text-align: center;
+                background: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
+                padding: 20px;
+                border-radius: 10px;
+            }
+            .form-container p:commandButton {
+                margin-top: 20px;
+            }
+             .header .spacer {
+                margin-right: 50px; /* Espacio entre el menú y los datos del cliente */
+            }
+            .back-button {
+                background-color: red;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 1em;
+                cursor: pointer;
+                border-radius: 5px;
+                text-decoration: none;
+                margin-left: 20px;
+            }
+            .back-button:hover {
+                background-color: darkred;
+            }
+            .form-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .form-header img {
+                height: 7cm;
+            }
+            .form-header .title {
+                font-size: 1.5em;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+            .background {
+                background-image: url('../../resources/img/inicio.png'); /* Ruta de la imagen */
+                background-size: cover;
+                background-position: center;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!-- Barra superior -->
+            <div class="header">
+                <div class="menu">
+                    <!-- Menú para seleccionar el tipo de pago -->
+                    <p:selectOneMenu id="tipoPago1" required="true" label="Tipo de Pago">
+                        <f:selectItem itemLabel="Seleccione el tipo de pago" itemValue="" />
+                        <f:selectItem itemLabel="Mensualidad de Lote" itemValue="Mensualidad de Lote" />
+                        <f:selectItem itemLabel="Mensualidad de Mantenimiento" itemValue="Mensualidad de Mantenimiento" />
+                        <f:selectItem itemLabel="Mensualidad de Servicios" itemValue="Mensualidad de Servicios" />
+                    </p:selectOneMenu>
+           
+                    <h:panelGroup styleClass="spacer"/>
+                    <!-- Datos del cliente -->
+                    <h:outputText value="Nombre del Cliente: Juan Perez" />
+                </div> 
+
+                <!-- Botón para volver al inicio -->
+                <p:commandButton action="#{bkn_direccionamiento.inicioCliente()}" value="volver a inicio" styleClass="button" />
+            </div>
+
+            <!-- Contenedor de fondo -->
+            <div class="background">
+                <div class="form-container">
+                    <div class="form-header">
+                      <div class="title">Llenar formulario</div>
+                    </div>
+
+                    <!-- Formulario para realizar pagos -->
+                    <p:inputText id="txtNumeroTarjeta" placeholder="Número de tarjeta" required="true" label="Número de Tarjeta" style="width: 100%;" />
+                    <p:password id="txtVigencia" placeholder="Vigencia" label="Vigencia" redisplay="true" required="true" style="width: 100%;" />
+                    <p:inputText id="txtCvv" placeholder="CVV" required="true" label="CVV" style="width: 100%;" />
+                    <p:inputText id="txtCantidad" placeholder="Cantidad" required="true" label="Cantidad" style="width: 100%;" />
+                    
+                    <!-- Botón para realizar el pago -->
+                    <p:commandButton value="Realizar Pago" style="width: 100%;" />
+                </div>
+            </div>
+        </h:form>
+    </h:body>
 </html>
