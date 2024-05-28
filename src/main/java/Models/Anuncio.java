@@ -19,6 +19,18 @@ public class Anuncio implements Serializable {
     private Blob imagen;
     private String fecha_publicacion;
     private String fecha_vencimiento;
+
+    public Anuncio(Long usuario_id, String descripcion, Blob imagen, String fecha_publicacion, String fecha_vencimiento) {
+        this.usuario_id = usuario_id;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.fecha_publicacion = fecha_publicacion;
+        this.fecha_vencimiento = fecha_vencimiento;
+    }
+
+    public Anuncio() {
+    }
+    
     
 
     /**

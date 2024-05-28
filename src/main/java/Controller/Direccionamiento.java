@@ -48,7 +48,7 @@ public class Direccionamiento implements Serializable {
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         try {
-            externalContext.redirect("http://localhost:8075/CondominioGT/pages/inicio/bienvenidaCliente.xhtml"); // Reemplaza esta URL con la que desees abrir.
+            externalContext.redirect("http://localhost:8089/CondominioGT/pages/inicio/bienvenidaCliente.xhtml"); // Reemplaza esta URL con la que desees abrir.
         } catch (IOException ex) {
             Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
