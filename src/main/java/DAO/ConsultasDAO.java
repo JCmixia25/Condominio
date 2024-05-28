@@ -6,10 +6,18 @@ package DAO;
 
 import Models.Anuncio;
 import Models.Usuario;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import Models.ControlReportes;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,6 +30,8 @@ public class ConsultasDAO implements Serializable {
 
     ConexionDAO con = new ConexionDAO();
     private StreamedContent image;
+
+    private Connection conexion;
 
     public List<Usuario> consultarUsuarios() throws Exception {
         List<Usuario> Usuarios = new ArrayList<Usuario>();
@@ -56,7 +66,6 @@ public class ConsultasDAO implements Serializable {
                 }
             }
         }
-
         return Usuarios;
     }
     public List<ControlReportes> consultarReporte() throws Exception {
@@ -97,9 +106,9 @@ public class ConsultasDAO implements Serializable {
 
     public List<Anuncio> consultarAnuncios() throws Exception {
         List<Anuncio> anuncios = new ArrayList<Anuncio>();
-
+         String query = "SELECT id_anuncio, usuario_id, descripcion fecha_publicacion, fecha_vencimiento FROM anuncio";
         try {
-            String query = "SELECT id_anuncio, usuario_id, descripcion fecha_publicacion, fecha_vencimiento FROM anuncio";
+           
             Statement s = con.conexionMysql().createStatement();
             ResultSet r = s.executeQuery(query);
 
@@ -115,7 +124,11 @@ public class ConsultasDAO implements Serializable {
                 anuncios.add(datos);
             }
         } catch (Exception e) {
+
+            System.out.println("Error al consultar anuncios" + query);
+
             System.out.println("Error al consultar anuncios");
+
         } finally {
             if (con != null) {
                 try {
@@ -126,8 +139,23 @@ public class ConsultasDAO implements Serializable {
                 }
             }
         }
-        
         return anuncios;
     }
 
+    public Long getUserId(String usuario, String contraseña) {
+        String query = "SELECT id FROM usuarios WHERE usuario = ? AND contraseña = ?";
+        try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+            stmt.setString(1, usuario);
+            stmt.setString(2, contraseña);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getLong("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
+
