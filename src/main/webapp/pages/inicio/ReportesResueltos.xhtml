@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Control Reportes</title>
+        <title>Reporte Resueltos</title>
         <style>
             body {
                 margin: 0;
@@ -131,10 +131,6 @@
             <div class="sidebar">
                 <h2>Prados La Esperanza</h2>
                 <h:form>
-                    <p:menu>
-                        <p:menuitem value="REPORTES PENDIENTES" actionListener="#{bkn_direccion.reportePendiente()}" />
-                        <p:menuitem value="REPORTES RESUELTOS" actionListener="#{bkn_direccion.reporteResuelto()}"/>
-                    </p:menu>
                 </h:form>
             </div>
             <div class="main-content">
@@ -157,35 +153,35 @@
                     </div>
                 </div>
 
-        <h2 style="text-align: center;">CONTROL DE INCIDENTES</h2>
-        <h:form id="consultaForm">         
-            <p:dataTable id="tblDatos" widgetVar="dtProducts" var="reporte" value="#{bkn_inicio.listaReportes}"
-                         reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaReportes}"
+        <h2 style="text-align: center;">REPORTES RESUELTOS</h2>
+<h:form id="consultaForm">         
+    <p:dataTable id="tblDatos" widgetVar="dtProducts" var="reporte" value="#{bkn_inicio.listaReportesFiltrados}"
+                 reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaReportesFiltrados}"
+                 editable="true">
+        <p:column headerText="ID_REPORTE" sortBy="" filterBy="">       
+            <h:outputText value="#{reporte.id_reporte}"/>
+        </p:column>
+        <p:column headerText="AUTOR ID" sortBy="" filterBy="">
+            <h:outputText value="#{reporte.autor_id}"/>
+        </p:column>
+        <p:column headerText="USUARIO ASIGNADO ID" sortBy="" filterBy="">
+            <h:outputText value="#{reporte.usuario_asignado_id}"/>
+        </p:column>
+        <p:column headerText="DESCRIPCION" sortBy="" filterBy="">
+            <h:outputText value="#{reporte.descripcion}"/>
+        </p:column>
+        <p:column headerText="FECHA CREACION" sortBy="" filterBy="">
+            <h:outputText value="#{reporte.fecha_creacion}"/>
+        </p:column>
+        <p:column headerText="FECHA CIERRE" sortBy="" filterBy="">
+            <h:outputText value="#{reporte.fecha_cierre}"/>
+        </p:column>
+        <p:column headerText="ESTADO" sortBy="" filterBy="">
+            <h:outputText value="#{reporte.estado}"/>
+        </p:column>
+    </p:dataTable>
+</h:form>
 
-                         editable="true">
-                <p:column headerText="ID_REPORTE" sortBy="" filterBy="">       
-                    <h:outputText value="#{reporte.id_reporte}"/>
-                </p:column>
-                <p:column headerText="AUTOR ID" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.autor_id}"/>
-                </p:column>
-                <p:column headerText="USUARIO ASIGNADO ID" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.usuario_asignado_id}"/>
-                </p:column>
-                <p:column headerText="DESCRIPCION" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.descripcion}"/>
-                </p:column>
-                <p:column headerText="FECHA CREACION" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.fecha_creacion}"/>
-                </p:column>
-                <p:column headerText="FECHA CIERRE" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.fecha_cierre}"/>
-                </p:column>
-                <p:column headerText="ESTADO" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.estado}"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
             </div>
         </div>
     </h:body>

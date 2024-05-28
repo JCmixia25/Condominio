@@ -5,24 +5,53 @@
 package Controller;
 
 import DAO.ConsultasDAO;
-
 import Models.Anuncio;
-
 import Models.ControlReportes;
-
 import Models.Usuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
 //import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "bkn_inicio")
 public class inicioController implements Serializable {
+
+    /**
+     * @return the listaReportesFiltrados2
+     */
+    public List<ControlReportes> getListaReportesFiltrados2() {
+        return listaReportesFiltrados2;
+    }
+
+    /**
+     * @param listaReportesFiltrados2 the listaReportesFiltrados2 to set
+     */
+    public void setListaReportesFiltrados2(List<ControlReportes> listaReportesFiltrados2) {
+        this.listaReportesFiltrados2 = listaReportesFiltrados2;
+    }
+    
+    /**
+     * @return the listaReportesFiltrados
+     */
+    public List<ControlReportes> getListaReportesFiltrados() {
+        return listaReportesFiltrados;
+    }
+
+    /**
+     * @param listaReportesFiltrados the listaReportesFiltrados to set
+     */
+    public void setListaReportesFiltrados(List<ControlReportes> listaReportesFiltrados) {
+        this.listaReportesFiltrados = listaReportesFiltrados;
+    }
+
 
     private ConsultasDAO consulta;
 
@@ -426,13 +455,48 @@ public class inicioController implements Serializable {
     private Long id_reporte;
     private Long autor_id;
     private Long usuario_asignado_id;
-
     private String fecha_creacion;
     private String fecha_cierre;
     // private String estado;
     private List<ControlReportes> listaReportes;
+    private List<ControlReportes> listaReportesFiltrados;
+    private List<ControlReportes> listaReportesFiltrados2;
+
+    
+      public void listarReportesFiltrados() {
+        try {
+            if (listaReportes!= null) {
+                setListaReportesFiltrados(listaReportes.stream()
+                        .filter(reporte -> "resuelto".equalsIgnoreCase(reporte.getEstado()))
+                        .collect(Collectors.toList()));
+                System.out.println("Reportes filtrados encontrados: " + getListaReportesFiltrados().size());
+            } else {
+                System.out.println("No hay reportes para filtrar.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al filtrar reportes");
+            e.printStackTrace();
+        }
+    }
+      
+      public void listarReportesFiltrados2() {
+    try {
+        if (listaReportes!= null) {
+            setListaReportesFiltrados2(listaReportes.stream()
+                   .filter(reporte -> "pendiente".equalsIgnoreCase(reporte.getEstado()))
+                   .collect(Collectors.toList()));
+            System.out.println("Reportes filtrados encontrados: " + getListaReportesFiltrados2().size());
+        } else {
+            System.out.println("No hay reportes para filtrar.");
+        }
+    } catch (Exception e) {
+        System.out.println("Error al filtrar reportes");
+        e.printStackTrace();
+    }
+}
 
 
+      
     public void listarUsuarios() {
 
         ConsultasDAO consulta = new ConsultasDAO();
@@ -466,12 +530,13 @@ public class inicioController implements Serializable {
 
         try {
             setListaReportes(consulta.consultarReporte());
-            System.out.println("Reportes: " + consulta.consultarUsuarios());
+            System.out.println("Reportes: " + consulta.consultarReporte());
         } catch (Exception e) {
             System.out.println("Error al listar usuarios");
         }
 
     }
+            
 
     public void logout() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -494,10 +559,10 @@ public class inicioController implements Serializable {
     public void init() {
         // Puedes inicializar algún dato aquí si es necesario
         listarUsuarios();
-    
         listarAnuncios();
         listarReportes();
-        
+        listarReportesFiltrados();
+        listarReportesFiltrados2();
     }
 
 }
