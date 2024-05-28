@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsultasDAO {
+
     ConexionDAO con = new ConexionDAO();
-    
-        
-        public List<Usuario> consultarUsuarios() throws Exception {
+
+    public List<Usuario> consultarUsuarios() throws Exception {
         List<Usuario> Usuarios = new ArrayList<Usuario>();
 
         try {
@@ -51,5 +51,5 @@ public class ConsultasDAO {
 
         return Usuarios;
     }
-    
+
 }

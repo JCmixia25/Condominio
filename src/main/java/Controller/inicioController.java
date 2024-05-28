@@ -11,9 +11,75 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
-
 @ManagedBean(name = "bkn_inicio")
-public class inicioController implements Serializable  {
+public class inicioController implements Serializable {
+
+    /**
+     * @return the mensaje
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * @param mensaje the mensaje to set
+     */
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public void validarUsuario() throws Exception {
+
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+            setListaUsuarios(consulta.consultarUsuarios());
+            System.out.println("Usuarios: " + consulta.consultarUsuarios());
+        } catch (Exception e) {
+            System.out.println("Error al listar usuarios");
+        }
+
+        if (nombre_usuario.isEmpty() || contraseña.isEmpty()) {
+            mensaje = "Por favor llene los campos";
+        }
+
+        for (Usuario usuario : listaUsuarios) {
+            Direccionamiento direccion = new Direccionamiento();
+
+            if (usuario.getNombre_usuario().compareTo(nombre_usuario) == 0 && usuario.getContraseña().compareTo(contraseña) == 0) {
+                System.out.println("Usuario correcto");
+                
+                nombre_usuario = "";
+                contraseña = "";
+                mensaje = "";
+                
+                if(usuario.getRol_id()==1){
+                    direccion.inicioAdmin();
+                }else if(usuario.getRol_id()==2){
+                    direccion.inicioManto();
+                }else if(usuario.getRol_id()==3){
+                    direccion.inicioCliente();
+                }
+                   
+            } else {
+                mensaje = "Credenciales incorrectas";
+            }
+        }
+    }
+
+    /**
+     * @return the contraseña
+     */
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    /**
+     * @param contraseña the contraseña to set
+     */
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
 
     /**
      * @return the id_usuario
@@ -55,20 +121,6 @@ public class inicioController implements Serializable  {
      */
     public void setNombre_usuario(String nombre_usuario) {
         this.nombre_usuario = nombre_usuario;
-    }
-
-    /**
-     * @return the contraseña
-     */
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    /**
-     * @param contraseña the contraseña to set
-     */
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
     }
 
     /**
@@ -141,17 +193,18 @@ public class inicioController implements Serializable  {
         this.listaUsuarios = listaUsuarios;
     }
 
-        //Usuarios
+    //Usuarios
     private Long id_usuario;
     private Long persona_id;
-    private String nombre_usuario;
-    private String contraseña;
+    private String nombre_usuario = "";
+    private String contraseña = "";
     private Long rol_id;
-    private String fecha_ingreso; 
-    private String fecha_login;
-    private String estado;
+    private String fecha_ingreso = "";
+    private String fecha_login = "";
+    private String estado = "";
     private List<Usuario> listaUsuarios;
-    
+    private String mensaje = "";
+
     public void listarUsuarios() {
 
         ConsultasDAO consulta = new ConsultasDAO();
@@ -164,13 +217,11 @@ public class inicioController implements Serializable  {
         }
 
     }
-    
 
     @PostConstruct
     public void init() {
         // Puedes inicializar algún dato aquí si es necesario
         listarUsuarios();
     }
-    
 
 }
