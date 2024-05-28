@@ -460,6 +460,18 @@ public class inicioController implements Serializable {
         }
 
     }
+        public void listarReportes() {
+
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+            setListaReportes(consulta.consultarReporte());
+            System.out.println("Reportes: " + consulta.consultarUsuarios());
+        } catch (Exception e) {
+            System.out.println("Error al listar usuarios");
+        }
+
+    }
 
     public void logout() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -484,7 +496,7 @@ public class inicioController implements Serializable {
         listarUsuarios();
     
         listarAnuncios();
-//        listarReportes();
+        listarReportes();
         
     }
 
