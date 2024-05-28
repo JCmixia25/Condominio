@@ -42,6 +42,8 @@
                 bottom: 10px;
                 text-align: center;
                 color: captiontext;
+                background: #2c3e50;
+                padding: 10px;
             }
 
             .formContainer {
@@ -97,7 +99,7 @@
             <h:form id="frmLogin">
                 <h:panelGrid columns="1" style="margin-bottom: 20px; width: 250px" styleClass="gridContainer">
                     <h:panelGrid columns="1" style="margin-bottom: 20px; margin: auto" styleClass="gridContainer">
-                        <p:graphicImage style="width: 100px; height: 80px; margin: auto;" value="/Imagenes/Condominio.png"/>
+                        <p:graphicImage style="width: 100px; height: 80px; margin: auto;" value="../../resources/img/Condominio.png"/>
                     </h:panelGrid>
                     <p:inputText id="txtUsuario" placeholder="USUARIO" required="true" value="#{bkn_inicio.nombre_usuario}" label="Username" styleClass="inputField" />         
                     <p:password id="toggle" placeholder="CONTRASEÑA" label="Password" value="#{bkn_inicio.contraseña}" toggleMask="true" redisplay="true" styleClass="inputField"/>
@@ -107,7 +109,12 @@
             <p:outputLabel id="mensaje" value="#{bkn_inicio.mensaje}" style="color: darkslateblue"/>
         </div>
         <div class="correo">
-            <p:outputLabel value="pradosdelaesperanza@gmail.com"/>
+<h:panelGroup layout="block" style="display: grid; grid-template-columns: auto auto auto; gap: 20px;">
+    <p:outputLabel value="pradosdelaesperanza@gmail.com"/>
+    <p:outputLabel value="🏘️ Dirección: 8XF4+7JH, Santa Lucía Cotzumalguapa, Guatemala "/>
+    <p:outputLabel value="📞 Contacto +502 4018 6679 "/>
+</h:panelGroup>
+            
         </div>
     </h:body>
 </html>
