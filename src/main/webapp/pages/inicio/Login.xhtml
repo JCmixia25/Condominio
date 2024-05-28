@@ -14,52 +14,100 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 80vh;
+                height: 100vh;
                 background-image: url('../../resources/img/inicio.png');
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-color: #AAB7B8;
+                margin: 0;
+                font-family: Arial, sans-serif;
             }
-            .gridContainer {
-                /* No es necesario especificar display:flex aquí ya que h:panelGrid maneja su propio layout */
-            }
-            .imageWrapper {
-                text-align: center;
-            }
-            /* Estilo actualizado para el título */
+
             .titulo {
                 position: absolute;
-                top: 0;
-                font-family: 'Times New Roman', Times, serif; /* Cambiado a Times New Roman */
+                top: 50px;
+                font-family: 'Times New Roman', Times, serif;
                 font-size: 24px;
                 width: 100%;
                 height: 50px;
                 text-align: center;
-                color: #333;
+                color: white;
                 font-weight: bold;
-                background-color: lightblue; /* Color de resaltado celeste */
-                padding: 5px; /* Espacio alrededor del texto para mostrar el fondo */
+                padding: 5px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            .correo {
+                position: absolute;
+                bottom: 10px;
+                text-align: center;
+                color: captiontext;
+            }
+
+            .formContainer {
+                background: rgba(255, 255, 255, 0.8);
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+                width: 300px;
+                text-align: center;
+            }
+
+            .formContainer p:graphicImage {
+                margin-bottom: 20px;
+            }
+
+            .inputField {
+                width: 250px;
+                height: 40px;
+                font-size: 18px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+                padding-left: 10px;
+            }
+
+            p:commandButton {
+                width: 100%;
+                height: 40px;
+                font-size: 20px;
+                border-radius: 5px;
+                background-color: #5cb85c;
+                color: white;
+                border: none;
+                cursor: pointer;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            p:commandButton:hover {
+                background-color: #4cae4c;
+            }
+
+            .correo {   
+                color: white;
+                bottom: 30px;
             }
         </style>
     </h:head>
     <h:body>    
         <!-- Contenedor para el título -->
         <div class="titulo">PRADOS LA ESPERANZA</div>
-
-        <h:form>
-            <h:panelGrid columns="1" style="margin-bottom: 20px;" styleClass="gridContainer">
-                <h:panelGrid columns="1" style="margin-bottom: 20px; margin: auto" styleClass="gridContainer">
-                    <p:graphicImage style="width: 100px; height: 80px; margin: auto;" value="/Imagenes/Condominio.png"/>
+        <div  class="formContainer">
+            <h:form id="frmLogin">
+                <h:panelGrid columns="1" style="margin-bottom: 20px; width: 250px" styleClass="gridContainer">
+                    <h:panelGrid columns="1" style="margin-bottom: 20px; margin: auto" styleClass="gridContainer">
+                        <p:graphicImage style="width: 100px; height: 80px; margin: auto;" value="/Imagenes/Condominio.png"/>
+                    </h:panelGrid>
+                    <p:inputText id="txtUsuario" placeholder="USUARIO" required="true" value="#{bkn_inicio.nombre_usuario}" label="Username" styleClass="inputField" />         
+                    <p:password id="toggle" placeholder="CONTRASEÑA" label="Password" value="#{bkn_inicio.contraseña}" toggleMask="true" redisplay="true" styleClass="inputField"/>
                 </h:panelGrid>
-                <p:inputText id="txtUsuario" placeholder="USUARIO" required="true" label="Username" style="width: 100%; height: 40px; font-size: 18px;" />         
-                <p:password id="toggle" placeholder="CONTRASEÑA" label="Password" toggleMask="true" redisplay="true" style="width: 100%; height: 40px; font-size: 18px;"/>
-
-            </h:panelGrid>
-            <!-- Botón con tamaño aumentado -->
-            <p:commandButton value="ENTRAR" style="width: 100%; height: 40px; font-size: 20px;" />
-
-        </h:form>
-
+                <p:commandButton value="ENTRAR" action="#{bkn_inicio.validarUsuario()}" update="frmLogin, mensaje"/>
+            </h:form>
+            <p:outputLabel id="mensaje" value="#{bkn_inicio.mensaje}" style="color: darkslateblue"/>
+        </div>
+        <div class="correo">
+            <p:outputLabel value="pradosdelaesperanza@gmail.com"/>
+        </div>
     </h:body>
-
 </html>
