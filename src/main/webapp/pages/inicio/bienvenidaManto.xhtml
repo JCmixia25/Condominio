@@ -149,7 +149,7 @@
                         <div>
                             <h:form>
                                 <div>
-                                    <h:outputText id="user" value="Eybi Gúzman" styleClass="nombre-usuario"/>
+                                    <h:outputText id="user" value="Ruben Jeréz" styleClass="nombre-usuario"/>
                                 </div>
                                 <div>
                                     <p:commandButton id="salir" value="Salir" action="#{bkn_direccion.pasarelaPagos()}" style="margin:5px; background: none; border: none; padding: 1px; color: white; cursor: pointer;"/>
@@ -162,7 +162,6 @@
                     <h1>Anuncios</h1>
                     <p:dataTable id="tblDatos" widgetVar="dtProducts" var="usuario" value="#{bkn_inicio.listaUsuarios}"
                                  reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaUsuarios}"
-                                 rowKey="#{listaUsuario.id}" paginator="true" rows="15" rowSelectMode="add" paginatorPosition="top"
                                  editable="true">
                         <p:column headerText="ID_USUARIO" sortBy="" filterBy="">       
                             <h:outputText value="#{usuario.id_usuario}"/>
