@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean(name = "bkn_inicio")
 public class inicioController implements Serializable  {
+
     
     
     @PostConstruct
