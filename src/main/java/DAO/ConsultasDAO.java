@@ -38,7 +38,7 @@ public class ConsultasDAO {
                 Usuarios.add(datos);
             }
         } catch (Exception e) {
-            System.out.println("Error al consultar usuarios");
+            System.out.println("Error al consultar usuarioss");
         } finally {
             if (con != null) {
                 try {
@@ -54,34 +54,29 @@ public class ConsultasDAO {
     }
     
     //listar reportes
-     public List<Reporte> consultarReporte() throws Exception {
+    public List<Reporte> consultarReportes() throws Exception {
         List<Reporte> Reportes = new ArrayList<Reporte>();
 
         try {
-            String query = "SELECT id_reporte, autor_id, usuario_asignado_id, descripcion, imagen, fecha_creacion, fecha_cierre, estado FROM reporte";
+            String query = "SELECT id_reporte, autor_id, usuario_asignado_id, descripcion, imagen,fecha_creacion, fecha_cierre, estado from reporte";
             Statement s = con.conexionMysql().createStatement();
             ResultSet r = s.executeQuery(query);
-                  
 
             while (r.next()) {
-                Reporte datoss = new Reporte();
-                
-                datoss.setId_reporte(r.getLong("id_reporte"));
-                datoss.setAutor_id(r.getLong("autor_id"));
-                datoss.setUsuario_asignado_id(r.getLong("usuario_asignado_id"));
-                datoss.setDescripcion(r.getString("descipcion"));
-                datoss.setImagen(r.getLong("imagen"));
-                datoss.setFecha_creacion(r.getString("fecha_creacion"));
-                datoss.setFecha_cierre(r.getString("fecha_cierre"));
-                datoss.setEstado_reporte(r.getString("estado"));
-                Reportes.add(datoss);
-                
-            
+                Reporte datos = new Reporte();
+
+                datos.setId_reporte(r.getLong("id_reporte"));
+                datos.setAutor_id(r.getLong("autor_id"));
+                datos.setUsuario_asignado_id(r.getLong("usuario_asignado_id"));
+                datos.setDescripcion(r.getString("descripcion"));
+                datos.setImagen(r.getLong("imagen"));
+                datos.setFecha_cierre(r.getString("fecha_creacion"));
+                datos.setFecha_cierre(r.getString("fecha_cierre"));
+                datos.setEstado_reporte(r.getString("estado"));
+                Reportes.add(datos);
             }
-            
- 
         } catch (Exception e) {
-            System.out.println("Error al consultar reporte");
+            System.out.println("Error al consultar usuarioss");
         } finally {
             if (con != null) {
                 try {
@@ -94,9 +89,7 @@ public class ConsultasDAO {
         }
 
         return Reportes;
-     
-     }
-   
-
+    }
+  
 
 }

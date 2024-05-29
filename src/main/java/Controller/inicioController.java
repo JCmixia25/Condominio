@@ -5,10 +5,12 @@
 package Controller;
 
 import DAO.ConsultasDAO;
+import Models.ControlReportes;
 import Models.Usuario;
 import Models.Reporte;
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 //import org.primefaces.context.RequestContext;
@@ -42,8 +44,14 @@ public class inicioController implements Serializable {
     private String fecha_cierre;
     private String fecha_creacion;
     private List<Reporte>listaReportes;
-    
-    
+   
+/*     private List<ControlReportes> listaReportesFiltrados;
+    private List<ControlReportes> listaReportesFiltrados2;
+    // Filtro de Usuario Asignado ID de Mantenimiento 
+    private List<ControlReportes> listaReportesManto;
+    private List<ControlReportes> listaReportesManto2;
+  */ 
+   
     public void listarUsuarios() {
 
         ConsultasDAO consulta = new ConsultasDAO();
@@ -59,11 +67,11 @@ public class inicioController implements Serializable {
     
     public void listarReportes() {
 
-        ConsultasDAO consulta = new ConsultasDAO();
+        ConsultasDAO consultaa = new ConsultasDAO();
 
         try {
-            setListaReportes(consulta.consultarReporte());
-            System.out.println("Reportes: " + consulta.consultarUsuarios());
+            setListaReportes(consultaa.consultarReportes());
+            System.out.println("Reportes: " + consultaa.consultarReportes());
         } catch (Exception e) {
             System.out.println("Error al listar usuarios");
         }
@@ -115,14 +123,14 @@ public class inicioController implements Serializable {
                     direccion.inicioManto();
                 }else if(usuario.getRol_id()==3){
                     direccion.inicioCliente();
-                }
-                   
+                 } else if (usuario.getRol_id() == 4){
+                    direccion.inicioManto2(); 
             } else {
                 mensaje = "Credenciales incorrectas";
             }
         }
     }
-
+}
     
     public void cargarUsuarios(){
         
@@ -398,6 +406,74 @@ public class inicioController implements Serializable {
         this.listaReportes = listaReportes;
     }
     
+    //agregado manual
+    /**
+     * @return the listaReportesManto2
+     */
+    /*public List<ControlReportes> getListaReportesManto2() {
+        return listaReportesManto2;
+    }
 
+    /**
+     * @param listaReportesManto2 the listaReportesManto2 to set
+     */
+  /*  public void setListaReportesManto2(List<ControlReportes> listaReportesManto2) {
+        this.listaReportesManto2 = listaReportesManto2;
+    }
+*/
+    /**
+     * @return the listaReportesManto
+     */
+  /*  public List<ControlReportes> getListaReportesManto() {
+        return listaReportesManto;
+    }
+*/
+    /**
+     * @param listaReportesManto the listaReportesManto to set
+     */
+   /* public void setListaReportesManto(List<ControlReportes> listaReportesManto) {
+        this.listaReportesManto = listaReportesManto;
+    }
+    */
+    
+   
+           /*
+     public void listarReportesFiltradosPorUsuarioAsignadoId() {
+        try {
+            if (listaReportes!= null) {
+                // Filtrar reportes donde usuario_asignado_id es igual a 2
+                setListaReportesManto(listaReportes.stream()
+                       .filter(reporte -> "2".equals(String.valueOf(reporte.getUsuario_asignado_id())))
+                       .collect(Collectors.toList()));
+                System.out.println("Reportes filtrados encontrados: " + getListaReportesManto().size());
+            } else {
+                System.out.println("No hay reportes para filtrar.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al filtrar reportes");
+            e.printStackTrace();
+        }
+    }
+     
+      public void listarReportesFiltradosPorUsuarioAsignadoId2() {
+        try {
+            if (listaReportes!= null) {
+                // Filtrar reportes donde usuario_asignado_id es igual a 4
+                setListaReportesManto2(  listaReportes.stream()
+                       .filter(reporte -> "4".equals(String.valueOf(reporte.getUsuario_asignado_id())))
+                       .collect(Collectors.toList()));
+                System.out.println("Reportes filtrados encontrados: " + getListaReportesManto2().size());
+            } else {
+                System.out.println("No hay reportes para filtrar.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al filtrar reportes");
+            e.printStackTrace();
+        }
+    }
+      
+  
+   */
+    
 }
 
