@@ -6,6 +6,7 @@ package Controller;
 
 import DAO.ConsultasDAO;
 import Models.Usuario;
+import Models.Reporte;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -18,19 +19,70 @@ import javax.faces.bean.ManagedBean;
     
 public class inicioController implements Serializable {
 
-    /**
-     * @return the mensaje
-     */
-    public String getMensaje() {
-        return mensaje;
+    
+        //Usuarios
+    private Long id_usuario;
+    private Long persona_id;
+    private String nombre_usuario = "";
+    private String contraseña = "";
+    private Long rol_id;
+    private String fecha_ingreso = "";
+    private String fecha_login = "";
+    private String estado = "";
+    private List<Usuario> listaUsuarios;
+    private String mensaje = "";
+
+    //Reporte
+    private Long id_reporte;
+    private Long autor_id;
+    private Long usuario_asignado_id;
+    private Long imagen;
+    private String descripcion;
+    private String estado_reporte;
+    private String fecha_cierre;
+    private String fecha_creacion;
+    private List<Reporte>listaReportes;
+    
+    
+    public void listarUsuarios() {
+
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+            setListaUsuarios(consulta.consultarUsuarios());
+            System.out.println("Usuarios: " + consulta.consultarUsuarios());
+        } catch (Exception e) {
+            System.out.println("Error al listar usuarios");
+        }
+
+    }
+    
+    public void listarReportes() {
+
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+            setListaReportes(consulta.consultarReporte());
+            System.out.println("Reportes: " + consulta.consultarUsuarios());
+        } catch (Exception e) {
+            System.out.println("Error al listar usuarios");
+        }
+
     }
 
-    /**
-     * @param mensaje the mensaje to set
-     */
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+
+    @PostConstruct
+    public void init() {
+        // Puedes inicializar algún dato aquí si es necesario
+        listarUsuarios();
+//       cargarUsuarios();
+
+         listarReportes();
+
+
     }
+    
+
 
     public void validarUsuario() throws Exception {
 
@@ -78,6 +130,22 @@ public class inicioController implements Serializable {
 //        RequestContext.getCurrentInstance().execute("cargarVistaUsuarios()");
        
     }
+    
+    
+    /**
+     * @return the mensaje
+     */
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    /**
+     * @param mensaje the mensaje to set
+     */
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
     /**
      * @return the contraseña
      */
@@ -203,37 +271,133 @@ public class inicioController implements Serializable {
     public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
-
-    //Usuarios
-    private Long id_usuario;
-    private Long persona_id;
-    private String nombre_usuario = "";
-    private String contraseña = "";
-    private Long rol_id;
-    private String fecha_ingreso = "";
-    private String fecha_login = "";
-    private String estado = "";
-    private List<Usuario> listaUsuarios;
-    private String mensaje = "";
-
-    public void listarUsuarios() {
-
-        ConsultasDAO consulta = new ConsultasDAO();
-
-        try {
-            setListaUsuarios(consulta.consultarUsuarios());
-            System.out.println("Usuarios: " + consulta.consultarUsuarios());
-        } catch (Exception e) {
-            System.out.println("Error al listar usuarios");
-        }
-
+    
+    /**
+     * @return the id_reporte
+     */
+    public Long getId_reporte() {
+        return id_reporte;
     }
 
-    @PostConstruct
-    public void init() {
-        // Puedes inicializar algún dato aquí si es necesario
-        listarUsuarios();
-//       cargarUsuarios();
+    /**
+     * @param id_reporte the id_reporte to set
+     */
+    public void setId_reporte(Long id_reporte) {
+        this.id_reporte = id_reporte;
     }
+
+    /**
+     * @return the autor_id
+     */
+    public Long getAutor_id() {
+        return autor_id;
+    }
+
+    /**
+     * @param autor_id the autor_id to set
+     */
+    public void setAutor_id(Long autor_id) {
+        this.autor_id = autor_id;
+    }
+
+    /**
+     * @return the usuario_asignado_id
+     */
+    public Long getUsuario_asignado_id() {
+        return usuario_asignado_id;
+    }
+
+    /**
+     * @param usuario_asignado_id the usuario_asignado_id to set
+     */
+    public void setUsuario_asignado_id(Long usuario_asignado_id) {
+        this.usuario_asignado_id = usuario_asignado_id;
+    }
+
+    /**
+     * @return the imagen
+     */
+    public Long getImagen() {
+        return imagen;
+    }
+
+    /**
+     * @param imagen the imagen to set
+     */
+    public void setImagen(Long imagen) {
+        this.imagen = imagen;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the estado_reporte
+     */
+    public String getEstado_reporte() {
+        return estado_reporte;
+    }
+
+    /**
+     * @param estado_reporte the estado_reporte to set
+     */
+    public void setEstado_reporte(String estado_reporte) {
+        this.estado_reporte = estado_reporte;
+    }
+
+    /**
+     * @return the fecha_cierre
+     */
+    public String getFecha_cierre() {
+        return fecha_cierre;
+    }
+
+    /**
+     * @param fecha_cierre the fecha_cierre to set
+     */
+    public void setFecha_cierre(String fecha_cierre) {
+        this.fecha_cierre = fecha_cierre;
+    }
+
+    /**
+     * @return the fecha_creacion
+     */
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    /**
+     * @param fecha_creacion the fecha_creacion to set
+     */
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    /**
+     * @return the listaReportes
+     */
+    public List<Reporte> getListaReportes() {
+        return listaReportes;
+    }
+
+    /**
+     * @param listaReportes the listaReportes to set
+     */
+    public void setListaReportes(List<Reporte> listaReportes) {
+        this.listaReportes = listaReportes;
+    }
+    
+
 }
 
