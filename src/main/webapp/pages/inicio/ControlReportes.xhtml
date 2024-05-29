@@ -12,12 +12,10 @@
                 margin: 0;
                 font-family: Arial, sans-serif;
             }
-
             .container {
                 display: flex;
                 height: 100vh;
             }
-
             .sidebar {
                 background-color: #2c3e50;
                 color: white;
@@ -26,12 +24,10 @@
                 display: flex;
                 flex-direction: column;
             }
-
             .sidebar h2 {
                 color: #ecf0f1;
                 text-align: center;
             }
-
             .sidebar a {
                 color: #ecf0f1;
                 text-decoration: none;
@@ -39,17 +35,14 @@
                 margin: 5px 0;
                 display: block;
             }
-
             .sidebar a:hover {
                 background-color: #34495e;
             }
-
             .main-content {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
             }
-
             .header {
                 background-color: royalblue;
                 color: white;
@@ -58,7 +51,6 @@
                 justify-content: space-between;
                 align-items: center;
             }
-
             .header .profile {
                 display: flex;
                 align-items: center;
@@ -68,19 +60,15 @@
                 border-radius: 50%;
                 margin-right: 10px;
             }
-
             .header .profile p {
                 margin: 0;
             }
-
             .content {
                 padding: 20px;
             }
-
             .content h1 {
                 margin-top: 0;
             }
-
             .table-container {
                 background-color: white;
                 padding: 20px;
@@ -107,7 +95,6 @@
                 background: #dee2e6;
                 border-radius: 20px;
             }
-
             .nombre-usuario{
                 margin: 10px;
                 padding: 5px;
@@ -115,16 +102,13 @@
                 border-radius: 5px;
                 color: darkblue;
             }
-
             #salir {
                 display: block!important;
                 line-height: normal!important;
                 background: #34495e!important;
                 border-radius: 20px!important;
             }
-
         </style>
-
     </h:head>
     <h:body>
         <div class="container">
@@ -132,8 +116,15 @@
                 <h2>Prados La Esperanza</h2>
                 <h:form>
                     <p:menu>
-                        <p:menuitem value="REPORTES PENDIENTES" actionListener="#{bkn_direccion.reportePendiente()}" />
-                        <p:menuitem value="REPORTES RESUELTOS" actionListener="#{bkn_direccion.reporteResuelto()}"/>
+                        <!--<p:menuitem value="REPORTES PENDIENTES"/>
+                        <p:menuitem value="REPORTES RESUELTOS"/>-->
+                        <p:menuitem value="Pagos" actionListener="#{bkn_direccion.controlPagos()}" />
+                        <p:menuitem value="Reportes" actionListener="#{bkn_direccion.controlReportes()}"/>
+                        <p:menuitem value="Registro de Propiedades" actionListener="#{bkn_direccion.registroPropiedad()}"/>
+                        <p:menuitem value="Usuarios" actionListener="#{bkn_direccion.controlUsuarios()}"/>
+                        <p:menuitem value="Anuncios" actionListener="#{bkn_direccion.inicioAdmin()}"/>
+                        <p:menuitem value="Propiedades" actionListener="#{bkn_direccion.propiedades()}"/>
+                        <p:menuitem value="Reservas" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
                     </p:menu>
                 </h:form>
             </div>
@@ -157,35 +148,35 @@
                     </div>
                 </div>
 
-        <h2 style="text-align: center;">CONTROL DE INCIDENTES</h2>
-        <h:form id="consultaForm">         
-            <p:dataTable id="tblDatos" widgetVar="dtProducts" var="reporte" value="#{bkn_inicio.listaReportes}"
-                         reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaReportes}"
+                <h2 style="text-align: center;">CONTROL DE INCIDENTES</h2>
+                <h:form id="consultaForm">         
+                    <p:dataTable id="tblDatos" widgetVar="dtProducts" var="reporte" value="#{bkn_inicio.listaReportes}"
+                                 reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaReportes}"
 
-                         editable="true">
-                <p:column headerText="ID_REPORTE" sortBy="" filterBy="">       
-                    <h:outputText value="#{reporte.id_reporte}"/>
-                </p:column>
-                <p:column headerText="AUTOR ID" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.autor_id}"/>
-                </p:column>
-                <p:column headerText="USUARIO ASIGNADO ID" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.usuario_asignado_id}"/>
-                </p:column>
-                <p:column headerText="DESCRIPCION" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.descripcion}"/>
-                </p:column>
-                <p:column headerText="FECHA CREACION" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.fecha_creacion}"/>
-                </p:column>
-                <p:column headerText="FECHA CIERRE" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.fecha_cierre}"/>
-                </p:column>
-                <p:column headerText="ESTADO" sortBy="" filterBy="">
-                    <h:outputText value="#{reporte.estado}"/>
-                </p:column>
-            </p:dataTable>
-        </h:form>
+                                 editable="true">
+                        <p:column headerText="ID_REPORTE" sortBy="" filterBy="">       
+                            <h:outputText value="#{reporte.id_reporte}"/>
+                        </p:column>
+                        <p:column headerText="AUTOR ID" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.autor_id}"/>
+                        </p:column>
+                        <p:column headerText="USUARIO ASIGNADO ID" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.usuario_asignado_id}"/>
+                        </p:column>
+                        <p:column headerText="DESCRIPCION" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="FECHA CREACION" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.fecha_creacion}"/>
+                        </p:column>
+                        <p:column headerText="FECHA CIERRE" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.fecha_cierre}"/>
+                        </p:column>
+                        <p:column headerText="ESTADO" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.estado}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
             </div>
         </div>
     </h:body>

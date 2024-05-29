@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import Models.ControlReportes;
+import Models.Cuenta;
+import Models.RegistroPropiedad;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -69,11 +71,12 @@ public class ConsultasDAO implements Serializable {
         }
         return Usuarios;
     }
+
     public List<ControlReportes> consultarReporte() throws Exception {
         List<ControlReportes> Reporte = new ArrayList<ControlReportes>();
-
+        String query = "SELECT id_reporte, autor_id, usuario_asignado_id, descripcion, fecha_creacion, fecha_cierre, estado FROM reporte";
         try {
-            String query = "SELECT id_reporte, autor_id, usuario_asignado_id, descripcion, fecha_creacion, fecha_cierre, estado FROM reporte";
+
             Statement s = con.conexionMysql().createStatement();
             ResultSet r = s.executeQuery(query);
 
@@ -101,16 +104,16 @@ public class ConsultasDAO implements Serializable {
                 }
             }
         }
-
+        System.out.println("Reporte query: " + query);
         return Reporte;
     }
     
 
     public List<Anuncio> consultarAnuncios() throws Exception {
         List<Anuncio> anuncios = new ArrayList<Anuncio>();
-         String query = "SELECT id_anuncio, usuario_id, descripcion, fecha_publicacion, fecha_vencimiento FROM anuncio";
+        String query = "SELECT id_anuncio, usuario_id, descripcion, fecha_publicacion, fecha_vencimiento FROM anuncio";
         try {
-           
+
             Statement s = con.conexionMysql().createStatement();
             ResultSet r = s.executeQuery(query);
 
@@ -126,9 +129,6 @@ public class ConsultasDAO implements Serializable {
                 anuncios.add(datos);
             }
         } catch (Exception e) {
-
-            System.out.println("Error al consultar anuncios" + query);
-
             System.out.println("Error al consultar anuncios");
 
         } finally {
@@ -142,6 +142,109 @@ public class ConsultasDAO implements Serializable {
             }
         }
         return anuncios;
+    }
+
+    public List<Anuncio> consultarPagos() throws Exception {
+        List<Anuncio> anuncios = new ArrayList<Anuncio>();
+        String query = "SELECT id_anuncio, usuario_id, descripcion, fecha_publicacion, fecha_vencimiento FROM anuncio";
+        try {
+
+            Statement s = con.conexionMysql().createStatement();
+            ResultSet r = s.executeQuery(query);
+
+            while (r.next()) {
+                Anuncio datos = new Anuncio();
+
+                datos.setId_anuncio(r.getLong("id_anuncio"));
+                datos.setUsuario_id(r.getLong("usuario_id"));
+                datos.setDescripcion(r.getString("descripcion"));
+//              datos.setImagen(r.getBlob("imagen"));
+                datos.setFecha_publicacion(r.getString("fecha_publicacion"));
+                datos.setFecha_vencimiento(r.getString("fecha_vencimiento"));
+                anuncios.add(datos);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al consultar anuncios");
+
+        } finally {
+            if (con != null) {
+                try {
+                    con.conexionMysql().close();
+                    System.out.println("Cierre de conexion exitosa");
+                } catch (SQLException ex) {
+                    System.out.println("Error al cerrar conexion");
+                }
+            }
+        }
+        return anuncios;
+    }
+
+    public List<Cuenta> consultarCuenta() throws Exception {
+        List<Cuenta> cuentas = new ArrayList<Cuenta>();
+        String query = "SELECT id_cuenta, usuario_id, estado, saldo_pagar, saldo_deudor FROM cuenta";
+        try {
+
+            Statement s = con.conexionMysql().createStatement();
+            ResultSet r = s.executeQuery(query);
+
+            while (r.next()) {
+                Cuenta datos = new Cuenta();
+
+                datos.setId_cuenta(r.getLong("id_cuenta"));
+                datos.setUsuario_id(r.getLong("usuario_id"));
+                datos.setEstados(r.getString("estado"));
+//              datos.setImagen(r.getBlob("imagen"));
+                datos.setSaldo_pagar(r.getString("saldo_pagar"));
+                datos.setSaldo_deudor(r.getString("saldo_deudor"));
+                cuentas.add(datos);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al consultar cuentas: "+query);
+
+        } finally {
+            if (con != null) {
+                try {
+                    con.conexionMysql().close();
+                    System.out.println("Cierre de conexion exitosa");
+                } catch (SQLException ex) {
+                    System.out.println("Error al cerrar conexion");
+                }
+            }
+        }
+        return cuentas;
+    }
+    
+        public List<RegistroPropiedad> consultarRegistroPropiedad() throws Exception {
+        List<RegistroPropiedad> registros = new ArrayList<RegistroPropiedad>();
+        String query = "SELECT id_registro, persona_id, propiedad_id FROM registro_propiedad";
+        try {
+
+            Statement s = con.conexionMysql().createStatement();
+            ResultSet r = s.executeQuery(query);
+
+            while (r.next()) {
+                RegistroPropiedad datos = new RegistroPropiedad();
+
+                datos.setId_registro(r.getLong("id_registro"));
+                datos.setPersona_id(r.getLong("persona_id"));
+                datos.setPropiedad_id(r.getLong("propiedad_id"));
+
+                registros.add(datos);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al consultar registros cuentas: "+query);
+
+        } finally {
+            if (con != null) {
+                try {
+                    con.conexionMysql().close();
+                    System.out.println("Cierre de conexion exitosa");
+                } catch (SQLException ex) {
+                    System.out.println("Error al cerrar conexion");
+                }
+            }
+        }
+        return registros;
     }
 
     public Long getUserId(String usuario, String contraseña) {
@@ -160,4 +263,3 @@ public class ConsultasDAO implements Serializable {
         return null;
     }
 }
-

@@ -5,80 +5,54 @@
 package Controller;
 
 import DAO.ConsultasDAO;
+
 import Models.Anuncio;
+
 import Models.ControlReportes;
+import Models.Cuenta;
+import Models.RegistroPropiedad;
+
 import Models.Usuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
 //import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "bkn_inicio")
 public class inicioController implements Serializable {
+
     /**
-     * @return the listaReportesManto2
+     * @return the listaRegistros
      */
-    public List<ControlReportes> getListaReportesManto2() {
-        return listaReportesManto2;
+    public List<RegistroPropiedad> getListaRegistros() {
+        return listaRegistros;
     }
 
     /**
-     * @param listaReportesManto2 the listaReportesManto2 to set
+     * @param listaRegistros the listaRegistros to set
      */
-    public void setListaReportesManto2(List<ControlReportes> listaReportesManto2) {
-        this.listaReportesManto2 = listaReportesManto2;
+    public void setListaRegistros(List<RegistroPropiedad> listaRegistros) {
+        this.listaRegistros = listaRegistros;
     }
 
     /**
-     * @return the listaReportesManto
+     * @return the listaCuentas
      */
-    public List<ControlReportes> getListaReportesManto() {
-        return listaReportesManto;
+    public List<Cuenta> getListaCuentas() {
+        return listaCuentas;
     }
 
     /**
-     * @param listaReportesManto the listaReportesManto to set
+     * @param listaCuentas the listaCuentas to set
      */
-    public void setListaReportesManto(List<ControlReportes> listaReportesManto) {
-        this.listaReportesManto = listaReportesManto;
+    public void setListaCuentas(List<Cuenta> listaCuentas) {
+        this.listaCuentas = listaCuentas;
     }
-
-    /**
-     * @return the listaReportesFiltrados2
-     */
-    public List<ControlReportes> getListaReportesFiltrados2() {
-        return listaReportesFiltrados2;
-    }
-
-    /**
-     * @param listaReportesFiltrados2 the listaReportesFiltrados2 to set
-     */
-    public void setListaReportesFiltrados2(List<ControlReportes> listaReportesFiltrados2) {
-        this.listaReportesFiltrados2 = listaReportesFiltrados2;
-    }
-    
-    /**
-     * @return the listaReportesFiltrados
-     */
-    public List<ControlReportes> getListaReportesFiltrados() {
-        return listaReportesFiltrados;
-    }
-
-    /**
-     * @param listaReportesFiltrados the listaReportesFiltrados to set
-     */
-    public void setListaReportesFiltrados(List<ControlReportes> listaReportesFiltrados) {
-        this.listaReportesFiltrados = listaReportesFiltrados;
-    }
-
 
     private ConsultasDAO consulta;
 
@@ -225,8 +199,6 @@ public class inicioController implements Serializable {
     /**
      * @return the descripcion
      */
-  
-
     /**
      * @return the fecha_creacion
      */
@@ -328,21 +300,12 @@ public class inicioController implements Serializable {
                     direccion.inicioManto();
                 } else if (usuario.getRol_id() == 3) {
                     direccion.inicioCliente();
-                } else if (usuario.getRol_id() == 4){
-                    direccion.inicioManto2();
                 }
 
             } else {
                 mensaje = "Credenciales incorrectas";
             }
         }
-    }
-
-    public void cargarUsuarios() {
-
-        System.out.println("HOLA ESTA ES UNA PRUEBA");
-//        RequestContext.getCurrentInstance().execute("cargarVistaUsuarios()");
-
     }
 
     /**
@@ -469,7 +432,6 @@ public class inicioController implements Serializable {
     private List<Usuario> listaUsuarios;
     private String mensaje = "";
 
-    
     //Anuncio
     private Long id_anuncio;
     private Long usuario_id;
@@ -479,90 +441,22 @@ public class inicioController implements Serializable {
     private String fecha_vencimiento;
     private List<Anuncio> listaAnuncios;
 
-
     //Control reporte
     private Long id_reporte;
     private Long autor_id;
     private Long usuario_asignado_id;
+
     private String fecha_creacion;
     private String fecha_cierre;
+    // private String estado;
     private List<ControlReportes> listaReportes;
-    private List<ControlReportes> listaReportesFiltrados;
-    private List<ControlReportes> listaReportesFiltrados2;
     
-    // Filtro de Usuario Asignado ID de Mantenimiento 
-    private List<ControlReportes> listaReportesManto;
-    private List<ControlReportes> listaReportesManto2;
+    //Registro propiedades
+    private List<RegistroPropiedad> listaRegistros;
 
-     public void listarReportesFiltradosPorUsuarioAsignadoId() {
-        try {
-            if (listaReportes!= null) {
-                // Filtrar reportes donde usuario_asignado_id es igual a 2
-                setListaReportesManto(  listaReportes.stream()
-                       .filter(reporte -> "2".equals(String.valueOf(reporte.getUsuario_asignado_id())))
-                       .collect(Collectors.toList()));
-                System.out.println("Reportes filtrados encontrados: " + getListaReportesManto().size());
-            } else {
-                System.out.println("No hay reportes para filtrar.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error al filtrar reportes");
-            e.printStackTrace();
-        }
-    }
-     
-      public void listarReportesFiltradosPorUsuarioAsignadoId2() {
-        try {
-            if (listaReportes!= null) {
-                // Filtrar reportes donde usuario_asignado_id es igual a 4
-                setListaReportesManto2(  listaReportes.stream()
-                       .filter(reporte -> "4".equals(String.valueOf(reporte.getUsuario_asignado_id())))
-                       .collect(Collectors.toList()));
-                System.out.println("Reportes filtrados encontrados: " + getListaReportesManto2().size());
-            } else {
-                System.out.println("No hay reportes para filtrar.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error al filtrar reportes");
-            e.printStackTrace();
-        }
-    }
-     
-    
-      public void listarReportesFiltrados() {
-        try {
-            if (listaReportes!= null) {
-                setListaReportesFiltrados(listaReportes.stream()
-                        .filter(reporte -> "resuelto".equalsIgnoreCase(reporte.getEstado()))
-                        .collect(Collectors.toList()));
-                System.out.println("Reportes filtrados encontrados: " + getListaReportesFiltrados().size());
-            } else {
-                System.out.println("No hay reportes para filtrar.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error al filtrar reportes");
-            e.printStackTrace();
-        }
-    }
-      
-      public void listarReportesFiltrados2() {
-    try {
-        if (listaReportes!= null) {
-            setListaReportesFiltrados2(listaReportes.stream()
-                   .filter(reporte -> "pendiente".equalsIgnoreCase(reporte.getEstado()))
-                   .collect(Collectors.toList()));
-            System.out.println("Reportes filtrados encontrados: " + getListaReportesFiltrados2().size());
-        } else {
-            System.out.println("No hay reportes para filtrar.");
-        }
-    } catch (Exception e) {
-        System.out.println("Error al filtrar reportes");
-        e.printStackTrace();
-    }
-}
+    //Cuenta
+    private List<Cuenta> listaCuentas;
 
-
-      
     public void listarUsuarios() {
 
         ConsultasDAO consulta = new ConsultasDAO();
@@ -590,19 +484,54 @@ public class inicioController implements Serializable {
         }
 
     }
-        public void listarReportes() {
+
+    public void listarReportes() {
 
         ConsultasDAO consulta = new ConsultasDAO();
 
         try {
+
             setListaReportes(consulta.consultarReporte());
-            System.out.println("Reportes: " + consulta.consultarReporte());
+            System.out.println("Usuarios: " + consulta.consultarReporte());
+
         } catch (Exception e) {
-            System.out.println("Error al listar usuarios");
+            System.out.println("Error al listar reportes");
         }
+        System.out.println("Lista reportes: " + listaReportes.size());
 
     }
-            
+
+    public void listarCuentas() {
+
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+
+            setListaCuentas(consulta.consultarCuenta());
+            System.out.println("Cuentas: " + consulta.consultarCuenta());
+
+        } catch (Exception e) {
+            System.out.println("Error al listar reportes");
+        }
+        System.out.println("Lista reportes: " + listaReportes.size());
+
+    }
+    
+        public void listarPropiedades(){
+        
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+
+            setListaRegistros(consulta.consultarRegistroPropiedad());
+            System.out.println("Cuentas: " + consulta.consultarRegistroPropiedad());
+
+        } catch (Exception e) {
+            System.out.println("Error al listar registros");
+        }
+   
+        
+    }
 
     public void logout() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -625,12 +554,11 @@ public class inicioController implements Serializable {
     public void init() {
         // Puedes inicializar algún dato aquí si es necesario
         listarUsuarios();
+
         listarAnuncios();
         listarReportes();
-        listarReportesFiltrados();
-        listarReportesFiltrados2();
-        listarReportesFiltradosPorUsuarioAsignadoId();
-        listarReportesFiltradosPorUsuarioAsignadoId2();
+        listarCuentas();
+        listarPropiedades();
     }
 
 }
