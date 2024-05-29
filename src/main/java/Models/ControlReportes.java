@@ -97,17 +97,17 @@ public class ControlReportes implements Serializable {
     }
 
     /**
-     * @return the estador
+     * @return the estado
      */
     public String getEstado() {
         return estado;
     }
 
     /**
-     * @param estador the estador to set
+     * @param estado the estador to set
      */
-    public void setEstado(String estador) {
-        this.estado = estador;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     private Long id_reporte;
