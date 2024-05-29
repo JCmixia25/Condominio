@@ -4,12 +4,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+    <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+
+    </h:head>
+    
+     <h:body>
+      <div  class="content">
+                    <h1>Reportes</h1>
+                    <p:dataTable id="tblDatos" widgetVar  ="dtProducts" var="reporte" value="#{bkn_inicio.listaReportes}"
+                                 reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaReportes}"
+                                 editable="true">
+                        <p:column headerText="ID_REPORTE" sortBy="" filterBy="">       
+                            <h:outputText value="#{reporte.id_reporte}"/>
+                        </p:column>
+                        <p:column headerText="AUTOR_ID" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.autor_id}"/>
+                        </p:column>
+                        <p:column headerText="ID_USUARIO_ASIGNADO" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.usuario_asignado_id}"/>
+                        </p:column>
+                        <p:column headerText="DESCRIPCION" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="IMAGEN" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.imagen}"/>
+                        </p:column>
+                        <p:column headerText="FECHA_CREACION" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.fecha_creacion}"/>
+                        </p:column>
+                        <p:column headerText="FECHA_CIERRE" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.fecha_cierre}"/>
+                        </p:column>
+                        <p:column headerText="ESTADO" sortBy="" filterBy="">
+                            <h:outputText value="#{reporte.estado_reporte}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+   </h:body>
 </html>
