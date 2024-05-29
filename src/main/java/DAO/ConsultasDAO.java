@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -103,6 +104,7 @@ public class ConsultasDAO implements Serializable {
 
         return Reporte;
     }
+    
 
     public List<Anuncio> consultarAnuncios() throws Exception {
         List<Anuncio> anuncios = new ArrayList<Anuncio>();
