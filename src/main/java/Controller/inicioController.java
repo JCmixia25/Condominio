@@ -9,6 +9,8 @@ import DAO.ConsultasDAO;
 import Models.Anuncio;
 
 import Models.ControlReportes;
+import Models.Cuenta;
+import Models.RegistroPropiedad;
 
 import Models.Usuario;
 import java.io.IOException;
@@ -23,6 +25,34 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "bkn_inicio")
 public class inicioController implements Serializable {
+
+    /**
+     * @return the listaRegistros
+     */
+    public List<RegistroPropiedad> getListaRegistros() {
+        return listaRegistros;
+    }
+
+    /**
+     * @param listaRegistros the listaRegistros to set
+     */
+    public void setListaRegistros(List<RegistroPropiedad> listaRegistros) {
+        this.listaRegistros = listaRegistros;
+    }
+
+    /**
+     * @return the listaCuentas
+     */
+    public List<Cuenta> getListaCuentas() {
+        return listaCuentas;
+    }
+
+    /**
+     * @param listaCuentas the listaCuentas to set
+     */
+    public void setListaCuentas(List<Cuenta> listaCuentas) {
+        this.listaCuentas = listaCuentas;
+    }
 
     private ConsultasDAO consulta;
 
@@ -169,8 +199,6 @@ public class inicioController implements Serializable {
     /**
      * @return the descripcion
      */
-  
-
     /**
      * @return the fecha_creacion
      */
@@ -278,13 +306,6 @@ public class inicioController implements Serializable {
                 mensaje = "Credenciales incorrectas";
             }
         }
-    }
-
-    public void cargarUsuarios() {
-
-        System.out.println("HOLA ESTA ES UNA PRUEBA");
-//        RequestContext.getCurrentInstance().execute("cargarVistaUsuarios()");
-
     }
 
     /**
@@ -411,7 +432,6 @@ public class inicioController implements Serializable {
     private List<Usuario> listaUsuarios;
     private String mensaje = "";
 
-    
     //Anuncio
     private Long id_anuncio;
     private Long usuario_id;
@@ -420,7 +440,6 @@ public class inicioController implements Serializable {
     private String fecha_publicacion;
     private String fecha_vencimiento;
     private List<Anuncio> listaAnuncios;
-
 
     //Control reporte
     private Long id_reporte;
@@ -431,7 +450,12 @@ public class inicioController implements Serializable {
     private String fecha_cierre;
     // private String estado;
     private List<ControlReportes> listaReportes;
+    
+    //Registro propiedades
+    private List<RegistroPropiedad> listaRegistros;
 
+    //Cuenta
+    private List<Cuenta> listaCuentas;
 
     public void listarUsuarios() {
 
@@ -461,6 +485,54 @@ public class inicioController implements Serializable {
 
     }
 
+    public void listarReportes() {
+
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+
+            setListaReportes(consulta.consultarReporte());
+            System.out.println("Usuarios: " + consulta.consultarReporte());
+
+        } catch (Exception e) {
+            System.out.println("Error al listar reportes");
+        }
+        System.out.println("Lista reportes: " + listaReportes.size());
+
+    }
+
+    public void listarCuentas() {
+
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+
+            setListaCuentas(consulta.consultarCuenta());
+            System.out.println("Cuentas: " + consulta.consultarCuenta());
+
+        } catch (Exception e) {
+            System.out.println("Error al listar reportes");
+        }
+        System.out.println("Lista reportes: " + listaReportes.size());
+
+    }
+    
+        public void listarPropiedades(){
+        
+        ConsultasDAO consulta = new ConsultasDAO();
+
+        try {
+
+            setListaRegistros(consulta.consultarRegistroPropiedad());
+            System.out.println("Cuentas: " + consulta.consultarRegistroPropiedad());
+
+        } catch (Exception e) {
+            System.out.println("Error al listar registros");
+        }
+   
+        
+    }
+
     public void logout() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
@@ -482,10 +554,11 @@ public class inicioController implements Serializable {
     public void init() {
         // Puedes inicializar algún dato aquí si es necesario
         listarUsuarios();
-    
+
         listarAnuncios();
-//        listarReportes();
-        
+        listarReportes();
+        listarCuentas();
+        listarPropiedades();
     }
 
 }

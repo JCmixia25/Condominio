@@ -147,5 +147,15 @@ public class Direccionamiento implements Serializable {
             Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void registroPropiedad() {
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            externalContext.redirect("http://localhost:8089/CondominioGT/pages/inicio/RegistroPropiedad.xhtml"); // Reemplaza esta URL con la que desees abrir.
+        } catch (IOException ex) {
+            Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
