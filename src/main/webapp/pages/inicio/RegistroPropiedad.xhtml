@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Usuarios</title>
+        <title>Consulta de Usuario</title>
         <style>
             body {
                 margin: 0;
@@ -72,15 +72,13 @@
             .header .profile p {
                 margin: 0;
             }
-
             .content {
                 padding: 20px;
+               
             }
-
             .content h1 {
                 margin-top: 0;
             }
-
             .table-container {
                 background-color: white;
                 padding: 20px;
@@ -137,7 +135,7 @@
                         <p:menuitem value="Registro de Propiedades" actionListener="#{bkn_direccion.registroPropiedad()}"/>
                         <p:menuitem value="Usuarios" actionListener="#{bkn_direccion.controlUsuarios()}"/>
                         <p:menuitem value="Anuncios" actionListener="#{bkn_direccion.inicioAdmin()}"/>
-                        <p:menuitem value="Propiedades" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
+                        <p:menuitem value="Mensajes" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
                         <p:menuitem value="Reservas" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
                     </p:menu>
                 </h:form>
@@ -161,41 +159,23 @@
                         </div>
                     </div>
                 </div>
-
-                <h2 style="text-align: center;">USUARIOS</h2>
-                <h:form id="consultaForm">         
-                    <p:dataTable id="tblDatos" widgetVar="dtProducts" var="usuario" value="#{bkn_inicio.listaUsuarios}"
-                                 reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaUsuarios}"
+                <div  class="content">
+                    <h1 style="text-align: center">Anuncios</h1>
+                    <p:dataTable id="tblDatos" widgetVar="dtProducts" var="registro" value="#{bkn_inicio.listaRegistros}"
+                                 reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaRegistros}"
                                  editable="true">
-                        <p:column headerText="ID_USUARIO" sortBy="" filterBy="">       
-                            <h:outputText value="#{usuario.id_usuario}"/>
+                        <p:column headerText="REGISTRO" sortBy="" filterBy="">
+                            <h:outputText value="#{registro.id_registro}"/>
                         </p:column>
-                        <p:column headerText="PERSONA_ID" sortBy="" filterBy="">
-                            <h:outputText value="#{usuario.persona_id}"/>
+                        <p:column headerText="PERSONA" sortBy="" filterBy="">
+                            <h:outputText value="#{registro.persona_id}"/>
                         </p:column>
-                        <p:column headerText="NOMBRE USUARIO" sortBy="" filterBy="">
-                            <h:outputText value="#{usuario.nombre_usuario}"/>
+                        <p:column headerText="PROPIEDAD" sortBy="" filterBy="">
+                            <h:outputText value="#{registro.propiedad_id}"/>
                         </p:column>
-                        <p:column headerText="CONTRASEÑA" sortBy="" filterBy="">
-                            <h:outputText value="#{usuario.contraseña}"/>
-                        </p:column>
-                        <p:column headerText="ROL ID" sortBy="" filterBy="">
-                            <h:outputText value="#{usuario.rol_id}"/>
-                        </p:column>
-                        <p:column headerText="FECHA INGRESO" sortBy="" filterBy="">
-                            <h:outputText value="#{usuario.fecha_ingreso}"/>
-                        </p:column>
-                        <p:column headerText="FECHA LOGIN" sortBy="" filterBy="">
-                            <h:outputText value="#{usuario.fecha_login}"/>
-                        </p:column>
-                        <p:column headerText="ESTADO" sortBy="" filterBy="">
-                            <h:outputText value="#{usuario.estado}"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
+                    </p:dataTable>  
+                </div>
             </div>
         </div>
     </h:body>
 </html>
-
-

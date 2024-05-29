@@ -75,6 +75,7 @@
 
             .content {
                 padding: 20px;
+               
             }
 
             .content h1 {
@@ -134,9 +135,9 @@
                     <p:menu>
                         <p:menuitem value="Pagos" actionListener="#{bkn_direccion.controlPagos()}" />
                         <p:menuitem value="Reportes" actionListener="#{bkn_direccion.controlReportes()}"/>
-                        <p:menuitem value="Propiedades" actionListener="#{bkn_direccion.controlPropiedades()}"/>
+                        <p:menuitem value="Registro de Propiedades" actionListener="#{bkn_direccion.registroPropiedad()}"/>
                         <p:menuitem value="Usuarios" actionListener="#{bkn_direccion.controlUsuarios()}"/>
-                        <p:menuitem value="Anuncios" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
+                        <p:menuitem value="Anuncios" actionListener="#{bkn_direccion.inicioAdmin()}"/>
                         <p:menuitem value="Mensajes" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
                         <p:menuitem value="Reservas" actionListener="#{bkn_direccion.pasarelaPagos()}"/>
                     </p:menu>
@@ -155,37 +156,27 @@
                                     <h:outputText id="user" value="Josué Mixía" styleClass="nombre-usuario"/>
                                 </div>
                                 <div>
-                                    <p:commandButton id="salir" value="Salir" action="#{bkn_direccion.pasarelaPagos()}" style="margin:5px; background: none; border: none; padding: 1px; color: white; cursor: pointer;"/>
+                                    <p:commandButton id="salir" value="Salir" action="#{bkn_direccion.inicioLogin()}" style="margin:5px; background: none; border: none; padding: 1px; color: white; cursor: pointer;"/>
                                 </div>
                             </h:form>
                         </div>
                     </div>
                 </div>
                 <div  class="content">
-                    <h1>Listar Idiomas</h1>
-                    <div class="table-container">
-                        <p:panelGrid columns="3">
-                            <p:outputLabel value="Mostrar " />
-                            <p:selectOneMenu>
-                                <f:selectItem itemLabel="5" itemValue="5" />
-                                <f:selectItem itemLabel="10" itemValue="10" />
-                                <f:selectItem itemLabel="15" itemValue="15" />
-                            </p:selectOneMenu>
-                            <p:outputLabel value=" registros" />
-                            <p:outputLabel value="Procurar por:" />
-                            <p:inputText />
-                            <p:commandButton value="Adicionar"  style="float: right; background-color: royalblue; color: white; border: none; padding: 10px 20px; cursor: pointer;" />
-                        </p:panelGrid>
-                        <p:dataTable  var="idioma" styleClass="table">
-                            <p:column headerText="Nome">
-                                <h:outputText value="Ingles" />
-                            </p:column>
-                            <p:column headerText="Ordem">
-                                <h:outputText value="Español" />
-                            </p:column>
-                     
-                        </p:dataTable>
-                    </div>
+                    <h1 style="text-align: center">Anuncios</h1>
+                    <p:dataTable id="tblDatos" widgetVar="dtProducts" var="anuncio" value="#{bkn_inicio.listaAnuncios}"
+                                 reflow="true" styleClass="products-table" selection="#{bkn_inicio.listaAnuncios}"
+                                 editable="true">
+                        <p:column headerText="DESCRIPCION" sortBy="" filterBy="">
+                            <h:outputText value="#{anuncio.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="PUBLICACION" sortBy="" filterBy="">
+                            <h:outputText value="#{anuncio.fecha_publicacion}"/>
+                        </p:column>
+                        <p:column headerText="VENCIMIENTO" sortBy="" filterBy="">
+                            <h:outputText value="#{anuncio.fecha_vencimiento}"/>
+                        </p:column>
+                    </p:dataTable>  
                 </div>
             </div>
         </div>

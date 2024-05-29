@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 
@@ -23,6 +24,16 @@ import javax.faces.context.FacesContext;
 public class Direccionamiento implements Serializable {
 
 
+         public void inicioLogin() {
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            externalContext.redirect("http://localhost:8089/CondominioGT/pages/inicio/Login.xhtml"); // Reemplaza esta URL con la que desees abrir.
+        } catch (IOException ex) {
+            Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+         
     public void inicioAdmin() {
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -32,6 +43,7 @@ public class Direccionamiento implements Serializable {
             Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 
     public void inicioManto() {
 
@@ -48,7 +60,10 @@ public class Direccionamiento implements Serializable {
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         try {
-            externalContext.redirect("http://localhost:8075/CondominioGT/pages/inicio/bienvenidaCliente.xhtml"); // Reemplaza esta URL con la que desees abrir.
+
+
+            externalContext.redirect("http://localhost:8089/CondominioGT/pages/inicio/bienvenidaCliente.xhtml"); // Reemplaza esta URL con la que desees abrir.
+
         } catch (IOException ex) {
             Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,6 +144,34 @@ public class Direccionamiento implements Serializable {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         try {
             externalContext.redirect("http://localhost:8089/CondominioGT/pages/inicio/ReportesManto.xhtml"); // Reemplaza esta URL con la que desees abrir.
+        } catch (IOException ex) {
+            Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void registroPropiedad() {
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            externalContext.redirect("http://localhost:8089/CondominioGT/pages/inicio/RegistroPropiedad.xhtml"); // Reemplaza esta URL con la que desees abrir.
+        } catch (IOException ex) {
+            Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void reporteResuelto() {
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            externalContext.redirect("http://localhost:8080/CondominioGT/pages/inicio/ReportesResueltos.xhtml"); // Reemplaza esta URL con la que desees abrir.
+        } catch (IOException ex) {
+            Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void reportePendiente() {
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            externalContext.redirect("http://localhost:8080/CondominioGT/pages/inicio/ReportesPendientes.xhtml"); // Reemplaza esta URL con la que desees abrir.
         } catch (IOException ex) {
             Logger.getLogger(Direccionamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
