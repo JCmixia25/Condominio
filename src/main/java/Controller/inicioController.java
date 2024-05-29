@@ -23,6 +23,33 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "bkn_inicio")
 public class inicioController implements Serializable {
+    /**
+     * @return the listaReportesManto2
+     */
+    public List<ControlReportes> getListaReportesManto2() {
+        return listaReportesManto2;
+    }
+
+    /**
+     * @param listaReportesManto2 the listaReportesManto2 to set
+     */
+    public void setListaReportesManto2(List<ControlReportes> listaReportesManto2) {
+        this.listaReportesManto2 = listaReportesManto2;
+    }
+
+    /**
+     * @return the listaReportesManto
+     */
+    public List<ControlReportes> getListaReportesManto() {
+        return listaReportesManto;
+    }
+
+    /**
+     * @param listaReportesManto the listaReportesManto to set
+     */
+    public void setListaReportesManto(List<ControlReportes> listaReportesManto) {
+        this.listaReportesManto = listaReportesManto;
+    }
 
     /**
      * @return the listaReportesFiltrados2
@@ -301,6 +328,8 @@ public class inicioController implements Serializable {
                     direccion.inicioManto();
                 } else if (usuario.getRol_id() == 3) {
                     direccion.inicioCliente();
+                } else if (usuario.getRol_id() == 4){
+                    direccion.inicioManto2();
                 }
 
             } else {
@@ -457,11 +486,48 @@ public class inicioController implements Serializable {
     private Long usuario_asignado_id;
     private String fecha_creacion;
     private String fecha_cierre;
-    // private String estado;
     private List<ControlReportes> listaReportes;
     private List<ControlReportes> listaReportesFiltrados;
     private List<ControlReportes> listaReportesFiltrados2;
+    
+    // Filtro de Usuario Asignado ID de Mantenimiento 
+    private List<ControlReportes> listaReportesManto;
+    private List<ControlReportes> listaReportesManto2;
 
+     public void listarReportesFiltradosPorUsuarioAsignadoId() {
+        try {
+            if (listaReportes!= null) {
+                // Filtrar reportes donde usuario_asignado_id es igual a 2
+                setListaReportesManto(  listaReportes.stream()
+                       .filter(reporte -> "2".equals(String.valueOf(reporte.getUsuario_asignado_id())))
+                       .collect(Collectors.toList()));
+                System.out.println("Reportes filtrados encontrados: " + getListaReportesManto().size());
+            } else {
+                System.out.println("No hay reportes para filtrar.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al filtrar reportes");
+            e.printStackTrace();
+        }
+    }
+     
+      public void listarReportesFiltradosPorUsuarioAsignadoId2() {
+        try {
+            if (listaReportes!= null) {
+                // Filtrar reportes donde usuario_asignado_id es igual a 4
+                setListaReportesManto2(  listaReportes.stream()
+                       .filter(reporte -> "4".equals(String.valueOf(reporte.getUsuario_asignado_id())))
+                       .collect(Collectors.toList()));
+                System.out.println("Reportes filtrados encontrados: " + getListaReportesManto2().size());
+            } else {
+                System.out.println("No hay reportes para filtrar.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al filtrar reportes");
+            e.printStackTrace();
+        }
+    }
+     
     
       public void listarReportesFiltrados() {
         try {
@@ -563,6 +629,8 @@ public class inicioController implements Serializable {
         listarReportes();
         listarReportesFiltrados();
         listarReportesFiltrados2();
+        listarReportesFiltradosPorUsuarioAsignadoId();
+        listarReportesFiltradosPorUsuarioAsignadoId2();
     }
 
 }

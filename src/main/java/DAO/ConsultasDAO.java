@@ -108,7 +108,7 @@ public class ConsultasDAO implements Serializable {
 
     public List<Anuncio> consultarAnuncios() throws Exception {
         List<Anuncio> anuncios = new ArrayList<Anuncio>();
-         String query = "SELECT id_anuncio, usuario_id, descripcion fecha_publicacion, fecha_vencimiento FROM anuncio";
+         String query = "SELECT id_anuncio, usuario_id, descripcion, fecha_publicacion, fecha_vencimiento FROM anuncio";
         try {
            
             Statement s = con.conexionMysql().createStatement();
